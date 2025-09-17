@@ -1,6 +1,10 @@
 # 🔐 Strong Password Generator
 
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Click_Here-blue?style=for-the-badge)](https://rezashariatmadar.github.io/password-generator/)
+
 A modern, feature-rich password generator with advanced customization options, built with vanilla JavaScript and a beautiful dark theme UI.
+
+## 🚀 **[🌐 Try it Live!](https://rezashariatmadar.github.io/password-generator/)**
 
 ## ✨ Features
 
