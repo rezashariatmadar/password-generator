@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strong Password Generator - Secure, Customizable Password Creation Tool</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Generate secure, customizable passwords with our advanced password generator. Features include passphrases, pronounceable passwords, strength testing, and history management.">
+    <meta name="keywords" content="password generator, secure passwords, passphrase generator, password strength, cybersecurity, random password">
+    <meta name="author" content="Strong Password Generator">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Strong Password Generator - Secure Password Creation">
+    <meta property="og:description" content="Generate secure, customizable passwords with advanced features like passphrases, strength testing, and history management.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/favicon.ico">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Strong Password Generator">
+    <meta name="twitter:description" content="Generate secure, customizable passwords with advanced features.">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; script-src 'self'; img-src 'self' data:;">
+    
+    <!-- Performance Hints -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" media="all">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-shield-alt"></i> Strong Password Generator</h1>
+            <p>Generate secure passwords with advanced customization</p>
+        </header>
+
+        <main>
+            <!-- Password Generation Section -->
+            <section class="generator-section">
+                <div class="output-container">
+                    <div class="password-output">
+                        <input type="text" id="generatedPassword" readonly placeholder="Generated password will appear here...">
+                        <button id="copyBtn" class="copy-btn" title="Copy to clipboard">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="strength-indicator">
+                        <div class="strength-meter">
+                            <div id="strengthBar" class="strength-bar"></div>
+                        </div>
+                        <span id="strengthText">Password Strength</span>
+                    </div>
+                </div>
+
+                <div class="generation-tabs">
+                    <button class="tab-btn active" data-tab="password">Random Password</button>
+                    <button class="tab-btn" data-tab="passphrase">Passphrase</button>
+                    <button class="tab-btn" data-tab="pronounceable">Pronounceable</button>
+                </div>
+
+                <!-- Random Password Tab -->
+                <div id="password-tab" class="tab-content active">
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label for="passwordLength">Length: <span id="lengthValue">12</span></label>
+                            <input type="range" id="passwordLength" min="4" max="128" value="12" class="slider">
+                        </div>
+
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeUppercase" checked>
+                                <span class="checkmark"></span>
+                                Uppercase Letters (A-Z)
+                            </label>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeLowercase" checked>
+                                <span class="checkmark"></span>
+                                Lowercase Letters (a-z)
+                            </label>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeNumbers" checked>
+                                <span class="checkmark"></span>
+                                Numbers (0-9)
+                            </label>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeSymbols">
+                                <span class="checkmark"></span>
+                                Symbols (!@#$%^&*)
+                            </label>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="excludeAmbiguous">
+                                <span class="checkmark"></span>
+                                Exclude Ambiguous (0oO1lI)
+                            </label>
+                        </div>
+
+                        <div class="option-group">
+                            <label for="customChars">Custom Characters:</label>
+                            <input type="text" id="customChars" placeholder="Additional characters to include">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passphrase Tab -->
+                <div id="passphrase-tab" class="tab-content">
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label for="passphraseWords">Number of Words: <span id="wordsValue">4</span></label>
+                            <input type="range" id="passphraseWords" min="3" max="8" value="4" class="slider">
+                        </div>
+
+                        <div class="option-group">
+                            <label for="wordSeparator">Word Separator:</label>
+                            <select id="wordSeparator">
+                                <option value="-">Hyphen (-)</option>
+                                <option value="_">Underscore (_)</option>
+                                <option value=" ">Space ( )</option>
+                                <option value=".">Period (.)</option>
+                                <option value="">No separator</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="capitalizeWords">
+                                <span class="checkmark"></span>
+                                Capitalize First Letter
+                            </label>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeNumbers2">
+                                <span class="checkmark"></span>
+                                Include Numbers
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pronounceable Tab -->
+                <div id="pronounceable-tab" class="tab-content">
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label for="pronounceableLength">Length: <span id="pronounceableLengthValue">12</span></label>
+                            <input type="range" id="pronounceableLength" min="6" max="32" value="12" class="slider">
+                        </div>
+
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeNumbersPronounce" checked>
+                                <span class="checkmark"></span>
+                                Include Numbers
+                            </label>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="includeSymbolsPronounce">
+                                <span class="checkmark"></span>
+                                Include Symbols
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Policy Templates -->
+                <div class="policy-section">
+                    <label for="policyTemplate">Password Policy Template:</label>
+                    <select id="policyTemplate">
+                        <option value="custom">Custom</option>
+                        <option value="basic">Basic (8+ chars, mixed case)</option>
+                        <option value="corporate">Corporate (12+ chars, all types)</option>
+                        <option value="banking">Banking (16+ chars, complex)</option>
+                        <option value="high-security">High Security (20+ chars, maximum entropy)</option>
+                    </select>
+                </div>
+
+                <!-- Generation Buttons -->
+                <div class="button-group">
+                    <button id="generateBtn" class="generate-btn">
+                        <i class="fas fa-sync-alt"></i> Generate Password
+                    </button>
+                    <button id="batchBtn" class="batch-btn">
+                        <i class="fas fa-layer-group"></i> Generate Batch
+                    </button>
+                </div>
+
+                <!-- Batch Generation -->
+                <div id="batchSection" class="batch-section hidden">
+                    <div class="batch-controls">
+                        <label for="batchCount">Number of passwords: <span id="batchCountValue">5</span></label>
+                        <input type="range" id="batchCount" min="2" max="20" value="5" class="slider">
+                    </div>
+                    <div id="batchResults" class="batch-results"></div>
+                </div>
+            </section>
+
+            <!-- Password History Section -->
+            <section class="history-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-history"></i> Password History</h2>
+                    <div class="history-controls">
+                        <button id="clearHistoryBtn" class="clear-btn">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                        <button id="exportBtn" class="export-btn">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-container">
+                    <input type="text" id="historySearch" placeholder="Search password history...">
+                    <i class="fas fa-search"></i>
+                </div>
+
+                <div id="historyList" class="history-list">
+                    <div class="empty-state">
+                        <i class="fas fa-clock"></i>
+                        <p>No passwords generated yet</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Copy Notification -->
+        <div id="copyNotification" class="copy-notification">
+            <i class="fas fa-check"></i> Copied to clipboard!
+        </div>
+
+        <!-- Export Modal -->
+        <div id="exportModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Export Password History</h3>
+                    <button class="close-btn" id="closeExportModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="export-options">
+                        <label class="radio-label">
+                            <input type="radio" name="exportFormat" value="json" checked>
+                            <span class="radio-mark"></span>
+                            JSON Format (Encrypted)
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="exportFormat" value="csv">
+                            <span class="radio-mark"></span>
+                            CSV Format
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="exportFormat" value="txt">
+                            <span class="radio-mark"></span>
+                            Plain Text
+                        </label>
+                    </div>
+                    <button id="confirmExport" class="export-confirm-btn">
+                        <i class="fas fa-download"></i> Download Export
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
